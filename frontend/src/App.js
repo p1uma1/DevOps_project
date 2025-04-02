@@ -9,7 +9,7 @@ import Movies from "./pages/Movies";
 import About from "./pages/AboutPage/About";
 import Contact from "./pages/ContactPage/Contact";
 
-function App() {
+function App() {    //cmmnt
   const [user, setUser] = useState(() => {
     // Load user from local storage on initial render
     const storedUser = localStorage.getItem("user");

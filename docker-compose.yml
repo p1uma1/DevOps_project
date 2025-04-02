@@ -1,4 +1,4 @@
-
+version: '3.8'
 
 services:
 
@@ -6,17 +6,15 @@ services:
     image: postgres:latest
     container_name: postgres_db
     restart: always
-    environment:
-      POSTGRES_USER: myuser 
-      POSTGRES_PASSWORD: mypassword
-      POSTGRES_DB: mydatabase
+    env_file:
+      - ./backend/.env
     ports:
       - "5432:5432"
     networks:
       - app_network
     volumes:
       - db_data:/var/lib/postgresql/data
-  
+
   backend:
     build:
       context: ./backend
@@ -26,6 +24,8 @@ services:
       - "5000:5000"
     depends_on:
       - database
+    env_file:
+      - ./backend/.env
     networks:
       - app_network
 
@@ -41,10 +41,8 @@ services:
     networks:
       - app_network
 
-
 networks:
   app_network:
 
 volumes:
   db_data:
-
