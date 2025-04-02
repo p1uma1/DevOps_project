@@ -214,8 +214,8 @@ const MovieInfo = () => {
               <li key={r.id} style={{
                 marginTop: "10px",
               }}>
-                <strong>{r.user.username}</strong>: {r.review} 
-                <small>{new Date(r.timestamp).toLocaleString()}</small>
+                <strong>{r.user.username}</strong>: {r.review}  
+                <small> {new Date(r.timestamp).toLocaleString()}</small>
               </li>
             ))
           ) : (
