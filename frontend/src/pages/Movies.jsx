@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -9,6 +10,9 @@ export default function Movies() {
     const [error, setError] = useState(null);
     const [searchQuery, setSearchQuery] = useState("");
     const [category, setCategory] = useState("top250"); // Default category
+    
+
+    const navigate = useNavigate();
 
     
 
@@ -70,6 +74,9 @@ export default function Movies() {
                 }}
                 onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.05)")}
                 onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
+                // In your MovieCard component, add:
+                onClick={() => navigate(`/movie/${categoryEndpoints[category]}/${movie.id}`)}
+                
             >
                 <img
                     src={movie.primaryImage || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmVq-OmHL5H_5P8b1k306pFddOe3049-il2A&s"}
@@ -143,7 +150,7 @@ export default function Movies() {
                             transition: "background 0.3s",
                         }}
                     >
-                        {key === "top250" ? "Top 250" :
+                        {key === "top250-movies" ? "Top 250" :
                          key === "boxOffice" ? "Top Box Office" :
                          key === "popular" ? "Most Popular" : "Upcoming"}
                     </button>

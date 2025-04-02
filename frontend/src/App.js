@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import MovieInfo from "./pages/MovieInfo";
-import Navbar from "./components/Navbar";
-import MoviesPage from "./pages/MoviesPage/MoviesPage";
+import Navbar from "./components/Navbar/Navbar";
+// import MoviesPage from "./pages/MoviesPage/MoviesPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import SignupPage from "./pages/SignupPage/SignupPage";
 import Movies from "./pages/Movies";
+import About from "./pages/AboutPage/About";
+import Contact from "./pages/ContactPage/Contact";
 
 function App() {
   const [user, setUser] = useState(() => {
@@ -25,10 +27,13 @@ function App() {
   return (
     <Router>
       <div className="App">
-      <Navbar user={user} setUser={setUser}/>
+        <Navbar user={user} setUser={setUser} />
         <Routes>
           {/* Movies list page */}
           <Route path="/" element={<Movies />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/movie/:category/:id" element={<MovieInfo />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="/login" element={<LoginPage setUser={setUser} />} />
           <Route
             path="/signup"
