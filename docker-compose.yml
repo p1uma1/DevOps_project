@@ -18,9 +18,7 @@ services:
       - db_data:/var/lib/postgresql/data
   
   backend:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
+    image: k4sund/backend:latest
     container_name: spring_boot_app
     ports:
       - "5000:5000"
@@ -30,9 +28,7 @@ services:
       - app_network
 
   frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
+    image: k4sund/frontend:latest
     container_name: react_app
     ports:
       - "80:80"
