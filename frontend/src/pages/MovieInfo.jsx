@@ -10,8 +10,10 @@ const MovieInfo = () => {
   const [movies, setMovies] = useState([]);
   const navigate = useNavigate();
   const [review, setReview] = useState("");
+  const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const user = JSON.parse(localStorage.getItem("user"));
 
   const API_BASE_URL = "https://imdb236.p.rapidapi.com/imdb";
 
@@ -47,16 +49,61 @@ const MovieInfo = () => {
     }
   };
 
+  //fetch reviews 
+  const fetchReviews = async (movieId) => {
+    if (!movieId) {
+      return;
+  } 
+
+  try {
+    const res = await axios.get( `${process.env.REACT_APP_API_BASE_URL}/api/reviews/${movie.id}`);
+    setReviews(res.data);
+    console.log(res.data);
+  }
+  catch (error) {
+    console.error("Error fetching reviews:", error);
+    setReviews([]);
+  }
+  }
+
   useEffect(() => {
-    fetchMovies();
+    fetchMovies();   
+    
+    // console.log(user);
   }, [category, id]); // Add id as a dependency
 
-  const handleReviewSubmit = (e) => {
+  useEffect(() => {
+    if (movie) {
+      fetchReviews(movie.id);
+    }
+  }, [movie]);
+
+  const handleReviewSubmit = async(e) => {
     e.preventDefault();
-    // Here you would typically send the review to your backend
-    console.log("Review submitted:", review);
-    setReview("");
-    alert("Review submitted successfully!");
+
+    
+    if (!user) {
+      alert("You must be logged in to post a review.");
+      return;
+    }
+
+    const newReview = {
+      userId: user.id,
+      movieId: id,
+      reviewText: review,
+    };
+
+     try {
+      await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/reviews/add`, newReview, {
+        headers: { "Content-Type": "application/json" },
+      });
+      setReview("");
+      fetchReviews(id); // Refresh reviews after submitting
+    } catch (err) {
+      console.error("Error submitting review:", err);
+      alert("Failed to submit review.");
+    }
+   
   };
 
   if (loading) {
@@ -137,7 +184,11 @@ const MovieInfo = () => {
         </div>
       </div>
 
+      
       <div className="review-section">
+        {
+          user ? (
+        <div> 
         <h3>Write a Review</h3>
         <form onSubmit={handleReviewSubmit}>
           <textarea
@@ -147,7 +198,34 @@ const MovieInfo = () => {
             required
           />
           <button type="submit">Submit Review</button>
-        </form>
+          </form>
+          </div>
+          
+        ): (
+            null
+        )
+      }
+       
+
+        <h3>Reviews</h3>
+        <ul >
+          {reviews.length > 0 ? (
+            reviews.map((r) => (
+              <li key={r.id} style={{
+                marginTop: "10px",
+              }}>
+                <strong>{r.user.username}</strong>: {r.review} 
+                <small>{new Date(r.timestamp).toLocaleString()}</small>
+              </li>
+            ))
+          ) : (
+            <p>No reviews yet. Be the first to review!</p>
+          )}
+        </ul>
+
+
+
+
       </div>
     </div>
   );

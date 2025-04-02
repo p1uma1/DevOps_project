@@ -7,7 +7,7 @@ const About = () => {
     <div className="about-container">
       <section className="hero-section">
         <div className="hero-content">
-          <h1>About MovieCritic</h1>
+          <h1>About MovieApp</h1>
           <p>Your trusted source for honest, in-depth movie reviews</p>
         </div>
       </section>
@@ -16,7 +16,7 @@ const About = () => {
         <div className="container">
           <h2>Our Mission</h2>
           <p className="mission-text">
-            At MovieCritic, we're passionate about cinema and dedicated to helping 
+            At MovieApp, we're passionate about cinema and dedicated to helping 
             you find your next favorite movie. Our team of film enthusiasts watches, 
             analyzes, and reviews hundreds of movies each year to bring you the 
             most insightful critiques.
@@ -58,18 +58,18 @@ const About = () => {
           <div className="team-grid">
             <div className="team-member">
               <div className="member-photo" style={{ backgroundImage: "url('https://randomuser.me/api/portraits/women/44.jpg')" }}></div>
-              <h3>Sarah Johnson</h3>
+              <h3>Shalani Tharaka</h3>
               <p>Chief Film Critic</p>
             </div>
             <div className="team-member">
               <div className="member-photo" style={{ backgroundImage: "url('https://randomuser.me/api/portraits/men/32.jpg')" }}></div>
-              <h3>Michael Chen</h3>
+              <h3>Saranga Disasekara</h3>
               <p>Editor & Reviewer</p>
             </div>
             <div className="team-member">
               <div className="member-photo" style={{ backgroundImage: "url('https://randomuser.me/api/portraits/women/68.jpg')" }}></div>
-              <h3>Emma Rodriguez</h3>
-              <p>Indie Film Specialist</p>
+              <h3>Dinakshi Priyasad</h3>
+              <p>Film Specialist</p>
             </div>
           </div>
         </div>
