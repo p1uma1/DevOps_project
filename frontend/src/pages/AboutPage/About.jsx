@@ -63,7 +63,7 @@ const About = () => {
             </div>
             <div className="team-member">
               <div className="member-photo" style={{ backgroundImage: "url('https://randomuser.me/api/portraits/men/32.jpg')" }}></div>
-              <h3>Saranga Disasekara</h3>
+              <h3>Kasun Dilumina</h3>
               <p>Editor & Reviewer</p>
             </div>
             <div className="team-member">
