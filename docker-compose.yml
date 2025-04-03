@@ -1,7 +1,5 @@
 version: '3.8'
-
 services:
-
   database:
     image: postgres:latest
     container_name: postgres_db
@@ -14,9 +12,8 @@ services:
       - app_network
     volumes:
       - db_data:/var/lib/postgresql/data
-
   backend:
-    image: k4sund/backend:latest
+    image: ${BACKEND_IMAGE}:latest
     container_name: spring_boot_app
     ports:
       - "5000:5000"
@@ -26,9 +23,8 @@ services:
       - ./backend/.env
     networks:
       - app_network
-
   frontend:
-    image: k4sund/frontend:latest
+    image: ${FRONTEND_IMAGE}:latest
     container_name: react_app
     ports:
       - "80:80"
@@ -36,9 +32,7 @@ services:
       - backend
     networks:
       - app_network
-
 networks:
   app_network:
-
 volumes:
   db_data:
