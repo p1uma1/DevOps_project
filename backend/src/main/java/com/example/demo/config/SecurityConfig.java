@@ -23,6 +23,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize-> authorize
                 .requestMatchers("/api/users/register").permitAll()
                                 .requestMatchers("/api/users/{username}").permitAll()
+                                .requestMatchers("/api/reviews/add").permitAll()
+                                .requestMatchers("/api/reviews/{movieId}").permitAll()
                 .anyRequest().authenticated()
                 );
 

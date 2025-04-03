@@ -2,10 +2,13 @@ import { useState } from "react";
 import React from "react";
 import "./LoginPage.css";
 import axios from 'axios'
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = ({setUser}) => {
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
 
   const handleGoogleLogin = () => {
     console.log("Google Login clicked");
@@ -30,6 +33,8 @@ const LoginPage = ({setUser}) => {
         (response => {
           setUser(response.data); // Set the user state
           localStorage.setItem("user", JSON.stringify(response.data)); // Save the response data to localStorage
+          navigate("/");
+          
         })
     
       .catch(error => {

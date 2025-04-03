@@ -15,8 +15,10 @@ public class CorsConfig {
                 registry.addMapping("/**")
                         .allowedOrigins("http://3.85.56.162") // Change for production http://localhost
                         .allowedMethods("GET", "POST", "PUT", "DELETE")
+                        .allowedHeaders("*")
                         .allowCredentials(true);
             }
         };
     }
 }
+

@@ -1,22 +1,55 @@
 import React, { useState } from "react";
 import "./SignupPage.css";
+import { useNavigate } from "react-router-dom";
 
 const SignupPage = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const navigate = useNavigate();
+
   const handleGoogleSignup = () => {
     console.log("Google Signup clicked");
     // Add your Google authentication logic here
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    console.log("Name:", name);
-    console.log("Email:", email);
-    console.log("Password:", password);
+    // console.log("Name:", name);
+    // console.log("Email:", email);
+    // console.log("Password:", password);
     // Add your form submission logic here
+
+    const user = {
+      username:name,
+      email,
+      password
+    };
+
+    try { 
+      const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/users/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
+      });
+
+      if (!response.ok)
+      {
+        throw new Error("Registration failed");
+      }
+
+      const data = await response.json();
+      console.log("Registration successful:", data);
+      navigate("/login");
+    }
+    catch (error) {
+      console.error("Registration failed:", error);
+    }
+
+
   };
 
   return (
